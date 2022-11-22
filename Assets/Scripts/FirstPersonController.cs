@@ -7,6 +7,9 @@ using UnityEngine.InputSystem;
 
 public class FirstPersonController : MonoBehaviour
 {
+    [Header("Player Refs")]
+    [SerializeField] GunController gun;
+
     [Header("Player")]
     [Tooltip("Move speed of the character in m/s")]
     public float MoveSpeed = 4.0f;
@@ -132,6 +135,11 @@ public class FirstPersonController : MonoBehaviour
     public void OnSprint(InputValue value)
     {
         sprint = value.isPressed;
+    }
+
+    public void OnShoot()
+    {
+        gun.Shoot();
     }
 
     private void OnApplicationFocus(bool hasFocus)
