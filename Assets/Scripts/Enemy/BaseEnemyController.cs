@@ -5,6 +5,8 @@ public abstract class BaseEnemyController : MonoBehaviour, IDamageable
 {
     [Header("Enemy Properties")]
     [SerializeField] int maxHP;
+    [Tooltip("Leave 0 to set MaxHP on spawn")]
+    public int CurrentHP;
 
     [Header("Effects")]
     [SerializeField] ParticleSystem damageVFX;
@@ -12,7 +14,6 @@ public abstract class BaseEnemyController : MonoBehaviour, IDamageable
     [SerializeField] AudioClip deathSFX;
 
     // Internal vars
-    int currentHP;
     AudioSource audioSource;
     Rigidbody rb;
 
@@ -21,20 +22,20 @@ public abstract class BaseEnemyController : MonoBehaviour, IDamageable
         audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
         SetAlivePhysics(true);
-        currentHP = maxHP;
+        if (CurrentHP == 0) CurrentHP = maxHP;
     }
 
-    void Update()
+    public virtual void Update()
     {
         // Nope
     }
 
     public void OnDamage(float damage, float damageForce, RaycastHit hit)
     {
-        currentHP--;
-        Debug.Log($"{name} took {damage} damage and has {currentHP} HP left");
+        if (CurrentHP > 0) CurrentHP--;
+        Debug.Log($"{name} took {damage} damage and has {CurrentHP} HP left");
         DamangeEffects(hit);
-        if (currentHP < 1)
+        if (CurrentHP < 1)
         {
             OnDie();
             rb.AddForceAtPosition(damageForce * -hit.normal, hit.point, ForceMode.Impulse);
