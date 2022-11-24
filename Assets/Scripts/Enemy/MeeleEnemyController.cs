@@ -5,7 +5,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(Rigidbody))]
-public class MeeleEnemyController : BaseEnemyController
+public class MeleeEnemyController : BaseEnemyController
 {
     List<Color> hpColors = new List<Color> { Color.red, Color.magenta, Color.yellow, Color.green };
     private new Renderer renderer;
@@ -19,10 +19,10 @@ public class MeeleEnemyController : BaseEnemyController
     {
         base.Update();
         // Unit behaviour
-        UnitColour();
+        UnitColor();
     }
 
-    private void UnitColour()
+    private void UnitColor()
     {
         renderer.material.color = hpColors[CurrentHP];
     }

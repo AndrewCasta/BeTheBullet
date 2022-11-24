@@ -13,7 +13,7 @@ public abstract class BaseEnemyController : MonoBehaviour, IDamageable
     [SerializeField] AudioClip damageSFX;
     [SerializeField] AudioClip deathSFX;
 
-    // Internal vars
+    // Internal variables
     AudioSource audioSource;
     Rigidbody rb;
 
@@ -34,7 +34,7 @@ public abstract class BaseEnemyController : MonoBehaviour, IDamageable
     {
         if (CurrentHP > 0) CurrentHP--;
         Debug.Log($"{name} took {damage} damage and has {CurrentHP} HP left");
-        DamangeEffects(hit);
+        DamageEffects(hit);
         if (CurrentHP < 1)
         {
             OnDie();
@@ -43,7 +43,7 @@ public abstract class BaseEnemyController : MonoBehaviour, IDamageable
         else rb.AddForceAtPosition(damageForce / 10 * -hit.normal, hit.point, ForceMode.Impulse);
     }
 
-    private void DamangeEffects(RaycastHit hit)
+    private void DamageEffects(RaycastHit hit)
     {
         if (damageSFX != null) audioSource.PlayOneShot(damageSFX);
         if (damageVFX != null) Instantiate(damageVFX, hit.point, Quaternion.LookRotation(hit.normal));

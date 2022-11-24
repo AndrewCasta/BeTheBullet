@@ -24,7 +24,7 @@ public class GunController : MonoBehaviour
     [Header("Effects")]
     [SerializeField] AudioClip gunSFX;
     [SerializeField] ParticleSystem muzzleVFX; // This might not be in the right place when played?
-    [Tooltip("Generic effect that will play when a taget is hit that does not have it's own effect.")]
+    [Tooltip("Generic effect that will play when a target is hit that does not have it's own effect.")]
     [SerializeField] ParticleSystem hitVFX;
 
     // Internal vars

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UnitManager : MonoBehaviour
 {
-    [SerializeField] GameObject meeleEnemyPrefab;
+    [SerializeField] GameObject meleeEnemyPrefab;
     [SerializeField] int[] hpRange = new int[2];
     GameObject[] spawnPoints;
 
@@ -18,8 +18,8 @@ public class UnitManager : MonoBehaviour
     {
         foreach (var sp in spawnPoints)
         {
-            var enemy = Instantiate(meeleEnemyPrefab, sp.transform);
-            enemy.GetComponent<MeeleEnemyController>().CurrentHP = Random.Range(hpRange[0], hpRange[1] + 1);
+            var enemy = Instantiate(meleeEnemyPrefab, sp.transform);
+            enemy.GetComponent<MeleeEnemyController>().CurrentHP = Random.Range(hpRange[0], hpRange[1] + 1);
         }
     }
 
