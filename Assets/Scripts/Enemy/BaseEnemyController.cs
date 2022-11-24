@@ -5,7 +5,6 @@ public abstract class BaseEnemyController : MonoBehaviour, IDamageable
 {
     [Header("Enemy Properties")]
     [SerializeField] int maxHP;
-    [SerializeField] int currentHP;
 
     [Header("Effects")]
     [SerializeField] ParticleSystem damageVFX;
@@ -13,6 +12,7 @@ public abstract class BaseEnemyController : MonoBehaviour, IDamageable
     [SerializeField] AudioClip deathSFX;
 
     // Internal vars
+    int currentHP;
     AudioSource audioSource;
     Rigidbody rb;
 
@@ -21,6 +21,7 @@ public abstract class BaseEnemyController : MonoBehaviour, IDamageable
         audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
         SetAlivePhysics(true);
+        currentHP = maxHP;
     }
 
     void Update()
@@ -30,12 +31,15 @@ public abstract class BaseEnemyController : MonoBehaviour, IDamageable
 
     public void OnDamage(float damage, float damageForce, RaycastHit hit)
     {
-        Debug.Log($"{name} took {damage} damage.");
         currentHP--;
+        Debug.Log($"{name} took {damage} damage and has {currentHP} HP left");
         DamangeEffects(hit);
-        if (currentHP < 1) OnDie();
-        // Add forece after death, so it applies once physics are enabled
-        rb.AddForceAtPosition(damageForce * -hit.normal, hit.point, ForceMode.Impulse);
+        if (currentHP < 1)
+        {
+            OnDie();
+            rb.AddForceAtPosition(damageForce * -hit.normal, hit.point, ForceMode.Impulse);
+        }
+        else rb.AddForceAtPosition(damageForce / 10 * -hit.normal, hit.point, ForceMode.Impulse);
     }
 
     private void DamangeEffects(RaycastHit hit)
