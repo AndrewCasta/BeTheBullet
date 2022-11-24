@@ -9,6 +9,7 @@ public class GunController : MonoBehaviour
     [Tooltip("Bullets per second")]
     [SerializeField] int damage;
     [SerializeField] int ammo;
+    [SerializeField] float damageForce;
     int ammoRemaining;
     [Tooltip("Automatic or semi auto weapon")]
     [SerializeField] bool auto;
@@ -22,6 +23,10 @@ public class GunController : MonoBehaviour
 
     [Header("Effects")]
     [SerializeField] AudioClip gunSFX;
+    [Tooltip("Not implemented")]
+    [SerializeField] ParticleSystem muzzleVFX;
+    [Tooltip("Not implemented")]
+
     [SerializeField] ParticleSystem hitVFX;
 
 
@@ -37,11 +42,11 @@ public class GunController : MonoBehaviour
         if (Physics.Raycast(rayOrigin.position, rayOrigin.forward, out hit))
         {
             Debug.Log($"{hit.collider.name}: ouch!");
-            // IDamageable damageable = hit.collider.GetComponentInParent<IDamageable>();
-            // if (damageable != null)
-            // {
-            //     damageable.Damage(Damage, hit);
-            // }
+            IDamageable damageable = hit.collider.GetComponentInParent<IDamageable>();
+            if (damageable != null)
+            {
+                damageable.OnDamage(damage, damageForce, hit);
+            }
         }
     }
     private void ShootEffects()
