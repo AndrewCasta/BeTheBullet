@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public abstract class BaseEnemyController : MonoBehaviour, IDamageable
@@ -15,27 +16,32 @@ public abstract class BaseEnemyController : MonoBehaviour, IDamageable
     AudioSource audioSource;
     Rigidbody rb;
 
-    // Start is called before the first frame update
     public virtual void Start()
     {
         audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
+        SetAlivePhysics(true);
     }
 
-    // Update is called once per frame
     void Update()
     {
-
+        // Nope
     }
 
     public void OnDamage(float damage, float damageForce, RaycastHit hit)
     {
         Debug.Log($"{name} took {damage} damage.");
         currentHP--;
-        if (damageSFX != null) audioSource.PlayOneShot(damageSFX);
+        DamangeEffects(hit);
         if (currentHP < 1) OnDie();
         // Add forece after death, so it applies once physics are enabled
         rb.AddForceAtPosition(damageForce * -hit.normal, hit.point, ForceMode.Impulse);
+    }
+
+    private void DamangeEffects(RaycastHit hit)
+    {
+        if (damageSFX != null) audioSource.PlayOneShot(damageSFX);
+        if (damageVFX != null) Instantiate(damageVFX, hit.point, Quaternion.LookRotation(hit.normal));
     }
 
     public void OnDie()

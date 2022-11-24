@@ -11,10 +11,8 @@ public class MeeleEnemyController : BaseEnemyController
         base.Start();
     }
 
-
-    // Update is called once per frame
     void Update()
     {
-
+        // Unit behaviour
     }
 }
