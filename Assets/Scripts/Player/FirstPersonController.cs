@@ -75,7 +75,7 @@ public class FirstPersonController : MonoBehaviour
     private CharacterController _controller;
     private GameObject _mainCamera;
 
-    private const float _threshold = 0.01f;
+    private const float _threshold = 0.001f;
 
     private bool IsCurrentDeviceMouse
     {
