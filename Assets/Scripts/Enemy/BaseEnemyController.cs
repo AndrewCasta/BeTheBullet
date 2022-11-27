@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.AI;
 
 public abstract class BaseEnemyController : MonoBehaviour, IDamageable
 {
@@ -16,13 +17,14 @@ public abstract class BaseEnemyController : MonoBehaviour, IDamageable
     // Internal variables
     AudioSource audioSource;
     Rigidbody rb;
-    protected CharacterController characterController;
+    protected NavMeshAgent agent;
+
 
     public virtual void Start()
     {
         audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
-        characterController = GetComponent<CharacterController>();
+        agent = GetComponent<NavMeshAgent>();
         SetDeadPhysics(false);
         if (CurrentHP == 0) CurrentHP = maxHP;
     }
@@ -60,6 +62,8 @@ public abstract class BaseEnemyController : MonoBehaviour, IDamageable
 
     public void SetDeadPhysics(bool state)
     {
+        rb.isKinematic = !state;
         rb.freezeRotation = !state;
+        agent.enabled = !state;
     }
 }

@@ -112,6 +112,7 @@ GameObject:
   - component: {fileID: 7604672835813857722}
   - component: {fileID: 7604672835813857726}
   - component: {fileID: 7604672835813857727}
+  - component: {fileID: 3715106907445597979}
   m_Layer: 0
   m_Name: MeleeEnemy
   m_TagString: Untagged
@@ -331,3 +332,25 @@ MonoBehaviour:
   State: 0
   rotateSpeed: 5
   attackRange: 2.5
+--- !u!195 &3715106907445597979
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7604672835813857724}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4

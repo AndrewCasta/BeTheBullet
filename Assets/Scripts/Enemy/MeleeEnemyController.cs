@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(Rigidbody))]
@@ -11,6 +12,7 @@ public class MeleeEnemyController : BaseEnemyController
     public enum MeleeAiState { idle, chase, attack, dead }
     public MeleeAiState State;
     Transform playerTransform;
+
     [SerializeField] float rotateSpeed;
     [SerializeField] float attackRange;
 
@@ -58,13 +60,8 @@ public class MeleeEnemyController : BaseEnemyController
 
     private void ChaseState()
     {
-        Vector3 direction = Vector3.RotateTowards(transform.forward, playerTransform.position - transform.position, rotateSpeed * Time.deltaTime, 0f);
-        transform.rotation = Quaternion.LookRotation(direction);
-        CheckAttachRange();
-    }
-
-    private void CheckAttachRange()
-    {
+        agent.destination = playerTransform.position;
+        // CheckAttachRange
         if (Vector3.Distance(transform.position, playerTransform.position) < attackRange)
             State = MeleeAiState.attack;
     }
@@ -72,6 +69,9 @@ public class MeleeEnemyController : BaseEnemyController
     private void AttackState()
     {
         Attack();
+        // CheckAttachRange
+        if (Vector3.Distance(transform.position, playerTransform.position) > attackRange)
+            State = MeleeAiState.chase;
     }
 
     private void Attack()
