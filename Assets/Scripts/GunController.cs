@@ -9,9 +9,8 @@ public class GunController : MonoBehaviour
     [Header("Gun Properties")]
     [Tooltip("Bullets per second")]
     [SerializeField] int damage;
-    [SerializeField] int ammo;
+    [SerializeField] int maxAmmo;
     [SerializeField] float damageForce;
-    int ammoRemaining;
     [Tooltip("Automatic or semi auto weapon")]
     [SerializeField] bool auto;
     [Tooltip("Bullets per second")]
@@ -22,7 +21,9 @@ public class GunController : MonoBehaviour
     [SerializeField] Transform rayOrigin;
 
     [Header("Effects")]
-    [SerializeField] AudioClip gunSFX;
+    [SerializeField] AudioClip gunShotSFX;
+    [SerializeField] AudioClip gunDrySFX;
+    [SerializeField] AudioClip gunReloadSFX;
     [SerializeField] ParticleSystem muzzleVFX; // This might not be in the right place when played?
     [Tooltip("Generic effect that will play when a target is hit that does not have it's own effect.")]
     [SerializeField] ParticleSystem hitVFX;
@@ -30,20 +31,33 @@ public class GunController : MonoBehaviour
     // Internal vars
     AudioSource audioSource;
     Transform muzzlePoint;
+    bool canShoot;
+    int currentAmmo;
 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
         muzzlePoint = transform.Find("MuzzlePoint");
+        canShoot = true;
+        currentAmmo = maxAmmo;
     }
-
-
-
     public void Shoot()
     {
-        ShootRay();
-        ShootEffects();
+        if (canShoot)
+        {
+            currentAmmo--;
+            ShootRay();
+            ShootEffects();
+            if (currentAmmo > 0) Reload();
+        }
     }
+
+    private void Reload()
+    {
+        canShoot = false;
+        audioSource.PlayOneShot(gunReloadSFX);
+    }
+
     private void ShootRay()
     {
         RaycastHit hit;
@@ -63,7 +77,7 @@ public class GunController : MonoBehaviour
     }
     private void ShootEffects()
     {
-        audioSource.PlayOneShot(gunSFX);
+        audioSource.PlayOneShot(gunShotSFX);
         if (muzzleVFX != null) Instantiate(muzzleVFX, muzzlePoint);
     }
 

@@ -16,12 +16,14 @@ public abstract class BaseEnemyController : MonoBehaviour, IDamageable
     // Internal variables
     AudioSource audioSource;
     Rigidbody rb;
+    protected CharacterController characterController;
 
     public virtual void Start()
     {
         audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
-        SetAlivePhysics(true);
+        characterController = GetComponent<CharacterController>();
+        SetDeadPhysics(false);
         if (CurrentHP == 0) CurrentHP = maxHP;
     }
 
@@ -49,15 +51,15 @@ public abstract class BaseEnemyController : MonoBehaviour, IDamageable
         if (damageVFX != null) Instantiate(damageVFX, hit.point, Quaternion.LookRotation(hit.normal));
     }
 
-    public void OnDie()
+    public virtual void OnDie()
     {
         Debug.Log($"{name} died.");
         if (deathSFX != null) audioSource.PlayOneShot(deathSFX);
-        SetAlivePhysics(false);
+        SetDeadPhysics(true);
     }
 
-    public void SetAlivePhysics(bool state)
+    public void SetDeadPhysics(bool state)
     {
-        rb.freezeRotation = state;
+        rb.freezeRotation = !state;
     }
 }
