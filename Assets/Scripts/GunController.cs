@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using System.Threading.Tasks;
 
 [RequireComponent(typeof(AudioSource))]
 public class GunController : MonoBehaviour
@@ -32,6 +34,8 @@ public class GunController : MonoBehaviour
     AudioSource audioSource;
     Transform muzzlePoint;
     bool canShoot;
+    float shootTimer;
+    IEnumerator shootAutoRoutine;
     int currentAmmo;
 
     private void Start()
@@ -41,21 +45,59 @@ public class GunController : MonoBehaviour
         canShoot = true;
         currentAmmo = maxAmmo;
     }
-    public void Shoot()
+
+    private void Update()
+    {
+        shootTimer += Time.deltaTime;
+    }
+
+    public void Shoot(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (auto)
+            {
+                shootAutoRoutine = ShootAuto();
+                StartCoroutine(shootAutoRoutine);
+            }
+            else
+                ShootRound();
+        }
+        if (context.canceled)
+            StopCoroutine(shootAutoRoutine);
+    }
+    public void Reload(InputAction.CallbackContext context)
+    {
+        if (context.performed) StartCoroutine(ReloadGun());
+    }
+
+    IEnumerator ShootAuto()
+    {
+        while (true)
+        {
+            ShootRound();
+            yield return new WaitForSeconds(1 / rateOfFire);
+        }
+    }
+
+    private void ShootRound()
     {
         if (canShoot)
         {
             currentAmmo--;
             ShootRay();
             ShootEffects();
-            if (currentAmmo > 0) Reload();
+            if (currentAmmo == 0) StartCoroutine(ReloadGun());
         }
     }
 
-    private void Reload()
+    private IEnumerator ReloadGun()
     {
         canShoot = false;
+        yield return new WaitForSeconds(reloadTime);
         audioSource.PlayOneShot(gunReloadSFX);
+        currentAmmo = maxAmmo;
+        canShoot = true;
     }
 
     private void ShootRay()
