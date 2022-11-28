@@ -15,7 +15,7 @@ public abstract class BaseEnemyController : MonoBehaviour, IDamageable
     [SerializeField] AudioClip deathSFX;
 
     // Internal variables
-    AudioSource audioSource;
+    protected AudioSource audioSource;
     Rigidbody rb;
     protected NavMeshAgent agent;
 
@@ -34,7 +34,7 @@ public abstract class BaseEnemyController : MonoBehaviour, IDamageable
         // Nope
     }
 
-    public void OnDamage(float damage, float damageForce, RaycastHit hit)
+    public virtual void OnDamage(float damage, float damageForce, RaycastHit hit)
     {
         if (CurrentHP > 0) CurrentHP--;
         Debug.Log($"{name} took {damage} damage and has {CurrentHP} HP left");

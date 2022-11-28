@@ -8,13 +8,20 @@ using UnityEngine.AI;
 [RequireComponent(typeof(Rigidbody))]
 public class MeleeEnemyController : BaseEnemyController
 {
-    // AI
+    [Header("Effects")]
+    [SerializeField] AudioClip attackSFX;
+    [SerializeField] AudioClip damagedSFX;
+
     public enum MeleeAiState { idle, chase, attack, dead }
     public MeleeAiState State;
-    Transform playerTransform;
 
-    [SerializeField] float rotateSpeed;
+    [Header("Properties")]
     [SerializeField] float attackRange;
+    [SerializeField] float attackRate;
+    float attackTimer;
+
+    // Internal variables
+    Transform playerTransform;
 
     List<Color> hpColors = new List<Color> { Color.red, Color.magenta, Color.yellow, Color.green };
     private new Renderer renderer;
@@ -60,6 +67,7 @@ public class MeleeEnemyController : BaseEnemyController
 
     private void ChaseState()
     {
+        // TODO - Reduce calls to this. Check range & add timer.
         agent.destination = playerTransform.position;
         // CheckAttachRange
         if (Vector3.Distance(transform.position, playerTransform.position) < attackRange)
@@ -68,8 +76,13 @@ public class MeleeEnemyController : BaseEnemyController
 
     private void AttackState()
     {
-        Attack();
-        // CheckAttachRange
+        attackTimer -= Time.deltaTime;
+        if (attackTimer < 0)
+        {
+            Attack();
+            attackTimer = attackRate;
+        }
+        // CheckAttackRange
         if (Vector3.Distance(transform.position, playerTransform.position) > attackRange)
             State = MeleeAiState.chase;
     }
@@ -77,11 +90,18 @@ public class MeleeEnemyController : BaseEnemyController
     private void Attack()
     {
         Debug.Log("KIYAAAA");
+        audioSource.PlayOneShot(attackSFX);
     }
 
     private void DeadState()
     {
         //
+    }
+
+    public override void OnDamage(float damage, float damageForce, RaycastHit hit)
+    {
+        base.OnDamage(damage, damageForce, hit);
+        audioSource.PlayOneShot(damagedSFX);
     }
 
     private void UnitColor()
