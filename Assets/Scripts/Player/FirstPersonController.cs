@@ -117,29 +117,21 @@ public class FirstPersonController : MonoBehaviour
     }
 
     // Input asset methods
-    public void OnMove(InputValue value)
+    public void Move(InputAction.CallbackContext context)
     {
-        move = value.Get<Vector2>();
+        move = context.ReadValue<Vector2>();
     }
-
-    public void OnLook(InputValue value)
+    public void Look(InputAction.CallbackContext context)
     {
-        look = value.Get<Vector2>();
+        look = context.ReadValue<Vector2>();
     }
-
-    public void OnJump(InputValue value)
+    public void Jump(InputAction.CallbackContext context)
     {
-        jump = value.isPressed;
+        jump = context.performed;
     }
-
-    public void OnSprint(InputValue value)
+    public void Sprint(InputAction.CallbackContext context)
     {
-        sprint = value.isPressed;
-    }
-
-    public void OnShoot()
-    {
-        gun.Shoot();
+        sprint = context.performed;
     }
 
     private void OnApplicationFocus(bool hasFocus)
