@@ -4,7 +4,7 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - meleeEnemyPrefab: {fileID: 7604672835813857724, guid: 83e7d315051105842a28fc65a639dd60,
+  - meleeEnemyPrefab: {fileID: 4493914613880827488, guid: 6dc4cf4496348884d8ee27743ae38562,
       type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
