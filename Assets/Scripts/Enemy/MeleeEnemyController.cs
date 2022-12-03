@@ -5,12 +5,10 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(AudioSource))]
-[RequireComponent(typeof(Rigidbody))]
 public class MeleeEnemyController : BaseEnemyController
 {
     [Header("Effects")]
     [SerializeField] AudioClip attackSFX;
-    [SerializeField] AudioClip damagedSFX;
 
     public enum MeleeAiState { idle, chase, attack, dead }
     public MeleeAiState State;
@@ -23,16 +21,10 @@ public class MeleeEnemyController : BaseEnemyController
     // Internal variables
     Transform playerTransform;
 
-    List<Color> hpColors = new List<Color> { Color.red, Color.magenta, Color.yellow, Color.green };
-    private new Renderer renderer;
-
-
-
     override public void Start()
     {
         base.Start();
         playerTransform = GameObject.Find("Player").transform;
-        renderer = GetComponent<Renderer>();
         State = MeleeAiState.chase;
     }
 
@@ -40,13 +32,6 @@ public class MeleeEnemyController : BaseEnemyController
     {
         base.Update();
         StateMachine(State);
-        UnitColor();
-    }
-
-    public override void OnDie()
-    {
-        base.OnDie();
-        State = MeleeAiState.dead;
     }
 
     private void StateMachine(MeleeAiState state)
@@ -67,6 +52,7 @@ public class MeleeEnemyController : BaseEnemyController
 
     private void ChaseState()
     {
+        animator.SetFloat("Speed", agent.velocity.magnitude);
         // TODO - Reduce calls to this. Check range & add timer.
         agent.destination = playerTransform.position;
         // CheckAttachRange
@@ -91,6 +77,8 @@ public class MeleeEnemyController : BaseEnemyController
     {
         Debug.Log("KIYAAAA");
         audioSource.PlayOneShot(attackSFX);
+        animator.SetFloat("Speed", agent.velocity.magnitude);
+        animator.Play("Attack");
     }
 
     private void DeadState()
@@ -101,11 +89,12 @@ public class MeleeEnemyController : BaseEnemyController
     public override void OnDamage(float damage, float damageForce, RaycastHit hit)
     {
         base.OnDamage(damage, damageForce, hit);
-        audioSource.PlayOneShot(damagedSFX);
+        audioSource.PlayOneShot(damageSFX);
     }
 
-    private void UnitColor()
+    public override void OnDie()
     {
-        renderer.material.color = hpColors[CurrentHP];
+        base.OnDie();
+        State = MeleeAiState.dead;
     }
 }
