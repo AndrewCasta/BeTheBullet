@@ -45,9 +45,8 @@ public abstract class BaseEnemyController : MonoBehaviour, IDamageable
         if (CurrentHP < 1)
         {
             OnDie();
-            // rb.AddForceAtPosition(damageForce * -hit.normal, hit.point, ForceMode.Impulse);
+            hit.rigidbody.AddForceAtPosition(damageForce * -hit.normal, hit.point, ForceMode.Impulse);
         }
-        // else rb.AddForceAtPosition(damageForce / 10 * -hit.normal, hit.point, ForceMode.Impulse);
     }
 
     private void DamageEffects(RaycastHit hit)
