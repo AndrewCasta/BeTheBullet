@@ -5,5 +5,5 @@ using UnityEngine;
 public interface IDamageable
 {
     public void OnDamage(float damage, float damageForce, RaycastHit hit);
-    public void OnDie();
+    public void OnDie(float damageForce, RaycastHit hit);
 }

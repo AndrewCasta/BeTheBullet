@@ -92,9 +92,9 @@ public class MeleeEnemyController : BaseEnemyController
         audioSource.PlayOneShot(damageSFX);
     }
 
-    public override void OnDie()
+    public override void OnDie(float damageForce, RaycastHit hit)
     {
-        base.OnDie();
+        base.OnDie(damageForce, hit);
         State = MeleeAiState.dead;
     }
 }

@@ -2304,6 +2304,7 @@ GameObject:
   - component: {fileID: 5658890116391278945}
   - component: {fileID: 5658890116391278946}
   - component: {fileID: 5658890116391278944}
+  - component: {fileID: 3980686232731789938}
   m_Layer: 0
   m_Name: Base HumanHead
   m_TagString: Untagged
@@ -2406,6 +2407,21 @@ CharacterJoint:
   m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &3980686232731789938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6047576696113111744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b30fa690a3e5f18449819b51081730a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  limbPrefab: {fileID: 6174219887148432280, guid: 641ba16d0225e0a4b9008693fab2e7df,
+    type: 3}
+  originalLimb: {fileID: 8764129909079795667}
 --- !u!1 &6243670943701673801
 GameObject:
   m_ObjectHideFlags: 0
@@ -3492,7 +3508,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8375130118794971055}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 8f7380da49034cd488ddff94b1ac35d1, type: 3}
   m_Controller: {fileID: 9100000, guid: 2ef8e6599b7f9934e8ff0d64c5325a1f, type: 2}
   m_CullingMode: 1

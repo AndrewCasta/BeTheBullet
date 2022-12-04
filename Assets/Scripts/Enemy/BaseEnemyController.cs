@@ -44,8 +44,7 @@ public abstract class BaseEnemyController : MonoBehaviour, IDamageable
         DamageEffects(hit);
         if (CurrentHP < 1)
         {
-            OnDie();
-            hit.rigidbody.AddForceAtPosition(damageForce * -hit.normal, hit.point, ForceMode.Impulse);
+            OnDie(damageForce, hit);
         }
     }
 
@@ -55,11 +54,19 @@ public abstract class BaseEnemyController : MonoBehaviour, IDamageable
         if (damageVFX != null) Instantiate(damageVFX, hit.point, Quaternion.LookRotation(hit.normal));
     }
 
-    public virtual void OnDie()
+    public virtual void OnDie(float damageForce, RaycastHit hit)
     {
         Debug.Log($"{name} died.");
         if (deathSFX != null) audioSource.PlayOneShot(deathSFX);
         SetRagdoll(true);
+        var dismember = hit.collider.GetComponent<Dismember>();
+        if (dismember != null)
+        {
+            var limb = dismember.DismemberLimb();
+            limb.GetComponent<Rigidbody>().AddForceAtPosition(damageForce / 10 * -hit.normal, hit.point, ForceMode.Impulse);
+        }
+        else
+            hit.rigidbody.AddForceAtPosition(damageForce * -hit.normal, hit.point, ForceMode.Impulse);
     }
 
     public void SetRagdoll(bool state)
