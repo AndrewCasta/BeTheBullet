@@ -1472,7 +1472,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-2320
+  m_Name: pb_Mesh-9504
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2376,6 +2376,11 @@ PrefabInstance:
       propertyPath: damageForce
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 2601785044216584409, guid: ab9cabdbbce019942a0183ce34f18497,
+        type: 3}
+      propertyPath: m_Name
+      value: M4A1
+      objectReference: {fileID: 0}
     - target: {fileID: 2853702273007764097, guid: ab9cabdbbce019942a0183ce34f18497,
         type: 3}
       propertyPath: m_Mesh
@@ -2395,6 +2400,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player Rig
+      objectReference: {fileID: 0}
+    - target: {fileID: 5963385978499477884, guid: ab9cabdbbce019942a0183ce34f18497,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.004
+      objectReference: {fileID: 0}
+    - target: {fileID: 5963385978499477884, guid: ab9cabdbbce019942a0183ce34f18497,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.119
+      objectReference: {fileID: 0}
+    - target: {fileID: 5963385978499477884, guid: ab9cabdbbce019942a0183ce34f18497,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.731
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab9cabdbbce019942a0183ce34f18497, type: 3}
