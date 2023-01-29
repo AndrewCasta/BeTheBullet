@@ -2506,7 +2506,7 @@ PrefabInstance:
       objectReference: {fileID: 1377412309}
     - target: {fileID: 674919342, guid: ab9cabdbbce019942a0183ce34f18497, type: 3}
       propertyPath: m_VersionIndex
-      value: 1188
+      value: 1191
       objectReference: {fileID: 0}
     - target: {fileID: 292593937328639686, guid: ab9cabdbbce019942a0183ce34f18497,
         type: 3}
@@ -2601,7 +2601,7 @@ PrefabInstance:
     - target: {fileID: 2853702273007764097, guid: ab9cabdbbce019942a0183ce34f18497,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 1185
+      value: 1188
       objectReference: {fileID: 0}
     - target: {fileID: 3179963811776044831, guid: ab9cabdbbce019942a0183ce34f18497,
         type: 3}
@@ -2623,6 +2623,11 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: WeaponManager, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 4689210668474010544, guid: ab9cabdbbce019942a0183ce34f18497,
+        type: 3}
+      propertyPath: m_Name
+      value: Weapon1
+      objectReference: {fileID: 0}
     - target: {fileID: 4770977127255075789, guid: ab9cabdbbce019942a0183ce34f18497,
         type: 3}
       propertyPath: m_Name
@@ -2633,6 +2638,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 892f499725f2e3a40b7bd1049a707c24, type: 2}
+    - target: {fileID: 6808530960172589376, guid: ab9cabdbbce019942a0183ce34f18497,
+        type: 3}
+      propertyPath: m_Name
+      value: Weapon0
+      objectReference: {fileID: 0}
     - target: {fileID: 9043785259470522390, guid: ab9cabdbbce019942a0183ce34f18497,
         type: 3}
       propertyPath: WeaponHolster
