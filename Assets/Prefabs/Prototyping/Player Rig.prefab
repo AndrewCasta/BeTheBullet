@@ -282,7 +282,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1185
+  m_VersionIndex: 1191
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -334,7 +334,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: b9e01674357fa044499a3f14e13ae190, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -347,7 +347,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -749,7 +749,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1182
+  m_VersionIndex: 1188
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -801,7 +801,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 892f499725f2e3a40b7bd1049a707c24, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -814,7 +814,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -954,10 +954,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  maxAmmo: 30
+  maxAmmo: 10
   damageForce: 200
-  auto: 1
-  rateOfFire: 10
+  auto: 0
+  rateOfFire: 30
   reloadTime: 1
   rayOrigin: {fileID: 9106064649019849297}
   gunShotSFX: {fileID: 8300000, guid: b75dfb9d22267484eb6b9ae9c3f70637, type: 3}
@@ -983,7 +983,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1001264106534901528
 Transform:
   m_ObjectHideFlags: 0
@@ -1103,7 +1103,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1249841056270307546}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
   m_Name: 
@@ -1517,8 +1517,8 @@ MonoBehaviour:
     m_ActionName: Player/Sprint[/Keyboard/leftShift,/XInputControllerWindows/leftTrigger]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2498398531781957150}
-        m_TargetAssemblyTypeName: GunController, Assembly-CSharp
+      - m_Target: {fileID: 9043785259470522390}
+        m_TargetAssemblyTypeName: WeaponManager, Assembly-CSharp
         m_MethodName: Shoot
         m_Mode: 0
         m_Arguments:
@@ -1660,8 +1660,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b27be1526d3f6a479cbb726e4cb1740, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WeaponHolster: {fileID: 0}
+  WeaponHolster: {fileID: 3726309101418843440}
   equiptWeapon: {fileID: 0}
+  startingWeapon: 0
 --- !u!1 &3726309101418843440
 GameObject:
   m_ObjectHideFlags: 0
@@ -1736,7 +1737,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2923679275574348106}
   m_Layer: 0
-  m_Name: Weapon2
+  m_Name: Weapon1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1803,7 +1804,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2531973852407522002}
   m_Layer: 0
-  m_Name: Weapon1
+  m_Name: Weapon0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
