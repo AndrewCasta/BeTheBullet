@@ -63,7 +63,7 @@ public class GunController : MonoBehaviour
             else
                 ShootRound();
         }
-        if (context.canceled)
+        if (context.canceled && auto)
             StopCoroutine(shootAutoRoutine);
     }
     public void Reload(InputAction.CallbackContext context)
